@@ -85,3 +85,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         WITH_V: true
+        DEFAULT_BUMP: minor
