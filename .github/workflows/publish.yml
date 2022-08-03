@@ -37,7 +37,7 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
     
     - name: Get tag info
-      run: echo {{steps.anothr-Nick.outputs.new_tag}}
+      run: echo "{{steps.anothr-Nick.outputs.new_tag}}"
       
 #     - name: Build with Maven
 #       run: mvn -B package --file pom.xml
