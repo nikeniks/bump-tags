@@ -31,7 +31,7 @@ jobs:
   
   build-and-publish:  
     needs: generate-tags
-    if: needs.generate-tags.outputs.new_tag!=needs.generate-tags.outputs.tag
+    if: needs.generate-tags.outputs.new_tag!=needs.generate-tags.outputs.tag # To manage pipeline from failing if "#none" is added in commit message
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -42,7 +42,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+        server-id: github 
         settings-path: ${{ github.workspace }} # location for the settings.xml file
       
     - name: Build with Maven
@@ -54,23 +54,23 @@ jobs:
     - name: Commit Version
       run: mvn versions:commit 
         
-    - name: publish version
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-      env:
-        GITHUB_TOKEN: ${{  secrets.RELEASE_TOKEN  }}
+#     - name: publish version
+#       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+#       env:
+#         GITHUB_TOKEN: ${{  secrets.RELEASE_TOKEN  }}
         
-  create-release:
-    needs: [build-and-publish, generate-tags]
-    runs-on: ubuntu-latest    
-    steps:
-    - uses: actions/checkout@v3
+#   create-release:
+#     needs: [build-and-publish, generate-tags]
+#     runs-on: ubuntu-latest    
+#     steps:
+#     - uses: actions/checkout@v3
     
-    - name: Create a Release
-      uses: elgohr/Github-Release-Action@v4
-      env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-      with:
-        title: ${{ needs.generate-tags.outputs.tag }}
+#     - name: Create a Release
+#       uses: elgohr/Github-Release-Action@v4
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+#       with:
+#         title: ${{ needs.generate-tags.outputs.tag }}
 
   update-tag:
     needs: create-release
