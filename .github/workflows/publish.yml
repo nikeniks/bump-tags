@@ -40,7 +40,15 @@ jobs:
        - name: print output
          run: echo "${{ needs.generate-tags.outputs.tag }}"
          
-       
+  check-output-2:
+    needs: [check-output, generate-tags]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+     - name: print output
+       run: echo "${{ needs.generate-tags.outputs.tag }}"
     
   
 #   build:
