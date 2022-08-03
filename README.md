@@ -36,6 +36,7 @@ transfer failed for https://maven.pkg.github.com/nikeniks/bump-tags/com/example/
 
 ### :microscope: Test results for above bug observation
 1) https://github.com/nikeniks/bump-tags/runs/7656311775?check_suite_focus=true
+
 `#none test changes` is commit message.
 - Expected Behaviour: Ignore `DEFAULT_BUMP` setting and skip determining next tag.
 - Resultant Behaviour: As expected 
@@ -58,6 +59,7 @@ pre_release = false
 Default bump was set to none. Skipping...
 ```
 2) https://github.com/nikeniks/bump-tags/runs/7656330681?check_suite_focus=true
+
 `checking if minor update takes palce` is commit message but even then it was skip.
 - Expected behaviour:  Should have been to detemine next tagbased on `DEFAULT_BUMP` settings, 
 - Resultant Behaviour: Check the message below, the commit message that action received was 
@@ -82,7 +84,8 @@ Default bump was set to none. Skipping...
 ```
 3) https://github.com/nikeniks/bump-tags/actions/runs/2790949088
 To overcome this behaviour you will need to add #minor, #major or #patch in the next commit.
-`#minor because DEFAULT_BUMP doesnt work. There is a issue with DEFAULT_BUMP, stops working when you use #none in commit message and all the subsequent commits even without #none are considered with #none in commit message. checking if minor tag is updates. checking if minor update takes palce #none test changes` commit message
+
+`#minor because DEFAULT_BUMP doesnt work. There is a issue with DEFAULT_BUMP, stops working when you use #none in commit message and all the subsequent commits even without #none are considered with #none in commit message. checking if minor tag is updates. checking if minor update takes palce #none test changes` commit message.
 - Expected Behaviour: Determines the next tag based on commit message and bump it up.
 - Resultant Behaviour: As expected.
 
@@ -108,3 +111,4 @@ Bumping tag v0.10.0.
 ```
 
 ### After the above step you dont need to specify the manual bump. It again starts accepting the automatic bump that is mentioned in `DEFAULT_BUMP`. 
+
