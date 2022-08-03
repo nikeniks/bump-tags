@@ -39,10 +39,11 @@ jobs:
     - name: Get tag info
       run: echo ${{ steps.anothr-Nick.outputs.new_tag }}
       
-#     - name: Build with Maven
-#       run: mvn -B package --file pom.xml
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
 
-#     - name: Publish to GitHub Packages Apache Maven
-#       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-#       env:
-#         GITHUB_TOKEN: ${{  secrets.RELEASE_TOKEN  }}
+    - name: Publish to GitHub Packages Apache Maven
+    - run: mvn versions:update-parent -DallowSnapshots=true "-DparentVersion=${{ steps.anothr-Nick.outputs.tag }}"
+    - run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      env:
+        GITHUB_TOKEN: ${{  secrets.RELEASE_TOKEN  }}
