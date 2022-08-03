@@ -2,16 +2,16 @@
 ## _A small project which will be bumping up the tags based on new releases._
 
 ## 🏆 Feature
-- Determine what the next tag version will be.
-- Using Maven, build and publish your application to GitHub packages.
-- Create a GitHub release.
-- Create the next tag version.
+- Determine what the next tag version will be
+- Using Maven, build and publish your application to GitHub packages
+- Create a GitHub release
+- Create the next tag version
 
 ## :man_technologist: Tech
 - Java spring boot  
 - Maven
-- https://github.com/anothrNick/github-tag-action to determine and create next tag version.
-- https://github.com/elgohr/Github-Release-Action to create new Github release.
+- https://github.com/anothrNick/github-tag-action to determine and create next tag version
+- https://github.com/elgohr/Github-Release-Action to create new Github release
 - Github for version control
 - Github Actions for build pipeline
 
@@ -20,8 +20,8 @@
 Working is quite simple for this application.
 
 - The build checks for your code and based on the commit message it will determine the next tag version.
-- You can use either #major, #minor, #patch, or #none in your commit message to specify which tag version will be updated
-- If no #major, #minor or #patch is provided in commit message then "DFAULT_BUMP" configuration settings is selected for next tag version, by default the "DEFAULT_BUMP" is set tp #minor
+- You can use either #major, #minor, #patch, or #none in your commit message to specify which tag version will be updated.
+- If no #major, #minor or #patch is provided in commit message then "DFAULT_BUMP" configuration settings is selected for next tag version, by default the "DEFAULT_BUMP" is set tp #minor.
 - For #none in commint message the pipeline only runs "generate-tags" step in build pipeline thats because I have added a condition `if needs.generate-tags.outputs.new_tag!=needs.generate-tags.outputs.tag` if this condtion fails the subsequent jobs are skipped.
 - This is done so that the `mvn deploy` does not fail while publishing same version to github packages. 
 ```
