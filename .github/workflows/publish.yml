@@ -42,7 +42,17 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn versions:set -DnewVersion=${{ steps.anothr-Nick.outputs.tag }}| mvn versions:commit | mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+    - name: Update version
+      run: mvn versions:set -DnewVersion=${{ steps.anothr-Nick.outputs.tag }}
+      env:
+        GITHUB_TOKEN: ${{  secrets.RELEASE_TOKEN  }} 
+
+    - name: Commit Version
+      run: mvn versions:commit 
+      env:
+        GITHUB_TOKEN: ${{  secrets.RELEASE_TOKEN  }}
+        
+    - name: publish version
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{  secrets.RELEASE_TOKEN  }}
