@@ -19,8 +19,8 @@
 	<distributionManagement>
 	   <repository>
 	     <id>github</id>
-	     <name>GitHub OWNER Apache Maven Packages</name>
-	     <url>https://maven.pkg.github.com/OWNER/REPOSITORY</url>
+	     <name>GitHub OWNER Nikhil Vichare</name>
+	     <url>https://maven.pkg.github.com/nikeniks/bump-tags</url>
 	   </repository>
 	</distributionManagement>
 	<dependencies>
