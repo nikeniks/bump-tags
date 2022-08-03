@@ -107,4 +107,4 @@ Bumping tag v0.10.0.
 	New tag v0.11.0
 ```
 
-### After the above step you dont need to specify the manual bump it again accepts the automatic bump that is mentioned in `DEFAULT_BUMP`. 
+### After the above step you dont need to specify the manual bump. It again starts accepting the automatic bump that is mentioned in `DEFAULT_BUMP`. 
