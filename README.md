@@ -1,6 +1,8 @@
 # bump-tags
 ## _A small project which will be bumping up the tags based on new releases._
 
+![Build status](https://github.com/nikeniks/bump-tags/actions/workflows/publish.yml/badge.svg)
+
 ## 🏆 Feature
 - Determine what the next tag version will be
 - Using Maven, build and publish your application to GitHub packages
