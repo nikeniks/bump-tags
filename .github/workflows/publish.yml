@@ -14,7 +14,9 @@ jobs:
       permissions:
         contents: read
         packages: write
-
+      outputs:
+        tag: ${{ steps.anothr-Nick.outputs.tag }}
+      
       steps:
       - uses: actions/checkout@v3
         with:
@@ -26,6 +28,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           WITH_V: true
           DRY_RUN: True
+          
+          
   check-output:
       needs: generate-tags
       runs-on: ubuntu-latest
