@@ -31,7 +31,7 @@ jobs:
     
   testing-if:
        needs: generate-tags
-       if: ${{ needs.generate-tags.outputs.new_tag }}!=${{ needs.generate-tags.outputs.tag }}
+       if: 1==2
        runs-on: ubuntu-latest
        steps:
        - run: echo ${{ needs.generate-tags.outputs.new_tag }}
