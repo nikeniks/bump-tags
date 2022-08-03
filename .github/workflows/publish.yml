@@ -32,7 +32,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-
     steps:
     - uses: actions/checkout@v3
       with:
@@ -49,7 +48,7 @@ jobs:
       run: mvn -B package --file pom.xml
       
   update-and-publish:
-    needs: build
+    needs: [build,generate-tags]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -75,7 +74,7 @@ jobs:
         GITHUB_TOKEN: ${{  secrets.RELEASE_TOKEN  }}
         
   create-release:
-    needs: update-and-publish
+    needs: [update-and-publish,generate-tags]
     runs-on: ubuntu-latest
     permissions:
       contents: read
