@@ -34,7 +34,7 @@ jobs:
         packages: write
       steps:
        - name: print output
-         run: echo "${{ needs.generate-tags.output.tag }}"
+         run: echo "${{ needs.generate-tags.outputs.tag }}"
          
        
     
