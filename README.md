@@ -60,7 +60,7 @@ Default bump was set to none. Skipping...
 2) https://github.com/nikeniks/bump-tags/runs/7656330681?check_suite_focus=true
 `checking if minor update takes palce` is commit message but even then it was skip.
 - Expected behaviour:  Should have been to detemine next tagbased on `DEFAULT_BUMP` settings, 
-- Resultant Behaviour: But if you check the message below the commit message that the action received was 
+- Resultant Behaviour: Check the message below, the commit message that action received was 
 		    `checking if minor update takes palce #none test changes` that is basically commit message from current commit + commit message from previous 			commit. And becase of that it checked for #none and skipped the next tag.
 ```
 *** CONFIGURATION ***
