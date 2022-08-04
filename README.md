@@ -18,9 +18,6 @@
 - Github Actions for build pipeline
 
 ## :gear: Working
-
-Working is quite simple for this application.
-
 - The build checks for your code and based on the commit message it will determine the next tag version.
 - You can use either #major, #minor, #patch, or #none in your commit message to specify which tag version will be updated.
 - If no #major, #minor or #patch is provided in commit message then "DEFAULT_BUMP" configuration settings is selected for next tag version, by default the "DEFAULT_BUMP" is set tp #minor.
