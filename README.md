@@ -20,8 +20,8 @@
 ## :gear: Working
 - The build checks for your code and based on the commit message it will determine the next tag version.
 - You can use either #major, #minor, #patch, or #none in your commit message to specify which tag version will be updated.
-- If no #major, #minor or #patch is provided in commit message then "DEFAULT_BUMP" configuration settings is selected for next tag version, by default the "DEFAULT_BUMP" is set tp #minor.
-- For #none in commint message the pipeline only runs "generate-tags" step in build pipeline thats because I have added a condition `if needs.generate-tags.outputs.new_tag!=needs.generate-tags.outputs.tag` if this condtion fails the subsequent jobs are skipped.
+- If no #major, #minor or #patch is provided in commit message then "DEFAULT_BUMP" configuration settings is selected for next tag version, by default the "DEFAULT_BUMP" is set to #minor.
+- For #none in commint message the pipeline only runs "generate-tags" step in build pipeline thats because I have added a condition `if needs.generate-tags.outputs.new_tag!=needs.generate-tags.outputs.tag`. If this condtion fails the subsequent jobs are skipped.
 - This is done so that the `mvn deploy` does not fail while publishing same version to github packages. 
 ```
 transfer failed for https://maven.pkg.github.com/nikeniks/bump-tags/com/example/demo/0.0.0/demo-0.0.0.jar, status: 409 Conflict
@@ -60,7 +60,7 @@ Default bump was set to none. Skipping...
 2) https://github.com/nikeniks/bump-tags/runs/7656330681?check_suite_focus=true
 
 `checking if minor update takes palce` is commit message but even then it was skip.
-- Expected behaviour:  Should have been to detemine next tagbased on `DEFAULT_BUMP` settings, 
+- Expected behaviour:  Should have been able to detemine next tagbased on `DEFAULT_BUMP` settings.
 - Resultant Behaviour: Check the message below, the commit message that action received was 
 		    `checking if minor update takes palce #none test changes` that is basically commit message from current commit + commit message from previous 			commit. And becase of that it checked for #none and skipped the next tag.
 ```
@@ -84,7 +84,7 @@ Default bump was set to none. Skipping...
 3) https://github.com/nikeniks/bump-tags/actions/runs/2790949088
 To overcome this behaviour you will need to add #minor, #major or #patch in the next commit.
 
-`#minor because DEFAULT_BUMP doesnt work. There is a issue with DEFAULT_BUMP, stops working when you use #none in commit message and all the subsequent commits even without #none are considered with #none in commit message. checking if minor tag is updates. checking if minor update takes palce #none test changes` commit message.
+`#minor because DEFAULT_BUMP doesnt work. There is a issue with DEFAULT_BUMP, stops working when you use #none in commit message and all the subsequent commits even without #none are considered with #none in commit message. checking if minor tag is updates.` commit message.
 - Expected Behaviour: Determines the next tag based on commit message and bump it up.
 - Resultant Behaviour: As expected.
 
@@ -111,3 +111,30 @@ Bumping tag v0.10.0.
 
 ### After the above step you dont need to specify the manual bump. It again starts accepting the automatic bump that is mentioned in `DEFAULT_BUMP`. 
 
+4)  https://github.com/nikeniks/bump-tags/runs/7657375369?check_suite_focus=true
+You Can check this over here
+
+`You Can check this over here` commit message
+
+- Expected Behaviour: Defaults tag update to settings set on `DEFAULT_BUMP`.
+- Resultant Behaviour: As expected.
+```
+*** CONFIGURATION ***
+	DEFAULT_BUMP: minor
+	WITH_V: true
+	RELEASE_BRANCHES: master,main
+	CUSTOM_TAG: 
+	SOURCE: .
+	DRY_RUN: true
+	INITIAL_VERSION: 0.0.0
+	TAG_CONTEXT: repo
+	PRERELEASE_SUFFIX: beta
+	VERBOSE: true
+Is master a match for main
+Is main a match for main
+pre_release = false
+Update README.md
+minor
+Bumping tag v0.11.0. 
+	New tag v0.12.0
+```
