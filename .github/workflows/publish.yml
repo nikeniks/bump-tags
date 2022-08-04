@@ -70,7 +70,7 @@ jobs:
 #         title: ${{ needs.generate-tags.outputs.tag }}
 
   update-tag:
-    needs: create-release
+#     needs: create-release
     runs-on: ubuntu-latest
       
     steps:
