@@ -23,7 +23,7 @@ Working is quite simple for this application.
 
 - The build checks for your code and based on the commit message it will determine the next tag version.
 - You can use either #major, #minor, #patch, or #none in your commit message to specify which tag version will be updated.
-- If no #major, #minor or #patch is provided in commit message then "DFAULT_BUMP" configuration settings is selected for next tag version, by default the "DEFAULT_BUMP" is set tp #minor.
+- If no #major, #minor or #patch is provided in commit message then "DEFAULT_BUMP" configuration settings is selected for next tag version, by default the "DEFAULT_BUMP" is set tp #minor.
 - For #none in commint message the pipeline only runs "generate-tags" step in build pipeline thats because I have added a condition `if needs.generate-tags.outputs.new_tag!=needs.generate-tags.outputs.tag` if this condtion fails the subsequent jobs are skipped.
 - This is done so that the `mvn deploy` does not fail while publishing same version to github packages. 
 ```
@@ -32,7 +32,7 @@ transfer failed for https://maven.pkg.github.com/nikeniks/bump-tags/com/example/
 
 ## :bug: Bug in https://github.com/anothrNick/github-tag-action
 - While working on the action provided by `anothrNick/github-tag-action` I have found a possible bug. I am not completely sure but it certainly looks like it.
-- When you use `#none` in the commit message the action performs as expected and does not determain the next tag.
+- When you use `#none` in the commit message the action performs as expected and does not determine the next tag.
 - But for the next commit which is without `#none` in its message the action still considers that the commit message contains `#none` and does not determine next tag.
 - This behaviour is seen even though you set `DEFAULT_BUMP` to minor.
 
